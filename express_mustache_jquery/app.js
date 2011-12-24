@@ -3,11 +3,11 @@
  * Module dependencies.
  */
 
-var express = require('express')
-  , routes = require('./routes')
-  , routes2 = require('./routes2')
-
-var app = module.exports = express.createServer();
+var express = require('express'),
+    app = module.exports = express.createServer()
+    ,io = require('socket.io').listen(app),
+    routes = require('./routes')(app, io),
+    routes2 = require('./routes2');
 
 // Configuration
 
@@ -33,8 +33,7 @@ app.configure('production', function(){
 // Routes
 app.get('/jquery', routes2.jquery);
 app.get('/hello/:name', routes2.hello);
-app.get('/', routes.index);
-
+app.get('/', routes2.index);
 
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

@@ -8,7 +8,7 @@ exports.jquery = function(req, res){
 	
     var imgArray = [];
     $.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?", {
-        tags: "nodejs",
+        tags: "cat",
         tagmode: "any",
         format: "json"
     }, function(data) {
@@ -26,4 +26,8 @@ exports.jquery = function(req, res){
 
 exports.hello = function(req, res){
   res.render('hello', { username: req.params.name })
+};
+
+exports.index = function(req, res){
+  res.render('index', { title: 'Express' })
 };
